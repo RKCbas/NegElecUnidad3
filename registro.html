@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Iniciar Sesión</title>
+  <title>Registro</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -17,24 +17,17 @@
       height: 100vh;
     }
 
-    #login-container {
+    #register-container {
       background-color: #fbfeff;
       border-radius: 5px;
       box-shadow: 0 2px 5px rgb(254, 246, 246);
       padding: 50px;
       width: 300px;
     }
-    #registro-container {
-      background-color: #fbfeff;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgb(254, 246, 246);
-      padding: 50px;
-      width: 200px;
-    }
-    
 
     input[type="text"],
     input[type="password"],
+    input[type="email"],
     input[type="submit"] {
       width: 100%;
       padding: 20px;
@@ -49,32 +42,20 @@
       color: #fff;
       cursor: pointer;
     }
-    h2{
-      color:rgb(73, 63, 63);
+
+    h2 {
+      color: rgb(73, 63, 63);
     }
-
-
   </style>
 </head>
 <body>
-
-  <div id="login-container">
-    
-    <form action="index.html" method="post">
-      
-  <h2>Ingresa tu correo y contraseña para iniciar sesion  </h2>
-      <input type="text" id="username" name="username" placeholder="Usuario" required>
+  <div id="register-container">
+    <form action="login.html" method="post">
+      <h2>Regístrate</h2>
+      <input type="text" id="fullname" name="fullname" placeholder="Nombre completo" required>
+      <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
       <input type="password" id="password" name="password" placeholder="Contraseña" required>
-      <input type="submit" value="Iniciar Sesión">
-   
-    </form>
-  </div>
-
-  <div id="registro-container">
-    <form action="registro.html" method="post">
-  <h2>Aun no tienes cuenta? </h2>
       <input type="submit" value="Registrarse">
-   
     </form>
   </div>
 </body>

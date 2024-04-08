@@ -5,25 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tienda en línea</title>
   <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     /* Estilos personalizados */
-    .product-img {
-      max-width: 100%;
-      height: auto;
+    .navbar-brand img {
+      margin-right: 20px;
+      background-color: #537faa;
+      color: #74a3d9;
+    }
+
+    .card {
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .footer {
+      background-color: #537faa;
+      color: #74a3d9;
     }
   </style>
 </head>
 <body>
 
-<!-- Barra de navegación -->
+<!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <!-- Logotipo -->
     <a class="navbar-brand" href="#">
-      <img src="tu_logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-top">
-      Mi Tienda
+      <img src="logo.png" alt="Logo" width="50" height="50" class="d-inline-block align-top">
+      MANGACKEET
     </a>
     <!-- Botón para dispositivos móviles -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,9 +45,9 @@
     </button>
     <!-- Enlaces de navegación -->
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="proyecto.html">Inicio</a>
+          <a class="nav-link" href="index.html">Inicio</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProductos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -43,20 +57,20 @@
             <a class="dropdown-item" href="#">Mangas</a>
             <a class="dropdown-item" href="#">Shonen</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="Productos.html">Ver todos los productos</a>
+            <a class="dropdown-item" href="index.html">Ver todos los productos</a>
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contacto</a>
+          <a class="nav-link" href="contacto.html">Contacto</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPerfil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Perfil 
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownPerfil">
-            <a class="dropdown-item" href="#">Registro</a>
+            <a class="dropdown-item" href="registro.html">Registro</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Inicio de Sesión</a>
+            <a class="dropdown-item" href="login.html">Inicio de Sesión</a>
           </div>
         </li>
       </ul>
@@ -83,14 +97,14 @@
   <div class="row">
     <div class="col-md-6">
       <!-- Imagen del producto -->
-      <img src="imagen_producto.jpg" alt="Producto" class="product-img">
+      <img src="https://mangaplus.shueisha.co.jp/drm/title/200016/title_thumbnail_portrait_list/326463.jpg?key=09dca0493596f8810787b801693fca38&duration=86400"" alt="Producto" class="product-img">
     </div>
     <div class="col-md-6">
       <!-- Detalles del producto -->
-      <h2>Nombre del Producto</h2>
-      <p><strong>Precio:</strong> $XX.XX</p>
-      <p><strong>Descripción:</strong> XXX </p>
-      <p><strong>Cantidad Disponible:</strong> XX unidades</p>
+      <h2>One Piece Vol 1</h2>
+      <p><strong>Precio:</strong> $306.21</p>
+      <p><strong>Descripción:</strong>En la Gran Era Pirata, donde los océanos rugen con la promesa de aventuras y tesoros perdidos, una leyenda brilla más que ninguna otra: la del Rey de los Piratas, Gol D. Roger. Su legado, más allá de riquezas materiales, es el "gran tesoro de conexión humana", un enigma que inspira a navegantes de todos los rincones del mundo.</p>
+      <p><strong>Cantidad Disponible:</strong> 100 unidades</p>
       <!-- Formulario para seleccionar la cantidad -->
       <form>
         <div class="form-group">
