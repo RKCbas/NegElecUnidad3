@@ -1,376 +1,538 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MANGACKEET</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    /* Estilos personalizados */
-    .navbar-brand img {
-      margin-right: 20px;
-      background-color: #e1ecf6;
-      color: #eaeff5;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MANGACKEET</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      /* Estilos personalizados */
+      .navbar-brand img {
+        margin-right: 20px;
+        background-color: #e1ecf6;
+        color: #eaeff5;
+      }
 
-    .card {
-      transition: transform 0.3s;
-      height: 700px;
-    }
+      .card {
+        transition: transform 0.3s;
+        height: 700px;
+      }
 
-    .card:hover {
-      transform: translateY(-5px);
-    }
+      .card:hover {
+        transform: translateY(-5px);
+      }
 
-    .footer {
-      background-color: #e1e5ea;
-      color: #dae4ef;
-    }
-    .cookie-message {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-}
+      .footer {
+        background-color: #e1e5ea;
+        color: #dae4ef;
+      }
+      .cookie-message {
+        position: fixed;
+        bottom: 20px; /* Añadido un pequeño margen inferior para evitar que se superponga completamente con otros elementos */
+        left: 50%; /* Centramos el mensaje horizontalmente */
+        transform: translateX(-50%); /* Centramos el mensaje horizontalmente */
+        max-width: 80%; /* Limitamos el ancho máximo del mensaje */
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+        z-index: 9999; /* Prioridad alta de visualización */
+      }
 
-#accept-cookie {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-  </style>
-</head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M595ZQX5NX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-M595ZQX5NX');
-</script>
-<body>
-<div id="cookie-message" class="cookie-message">
-        Este sitio web utiliza cookies para mejorar la experiencia del usuario. <button id="accept-cookie">Aceptar</button>
-    </div>
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container">
-    <!-- Logotipo -->
-    <a class="navbar-brand" href="#">
-      <img src="logo.png" alt="Logo" width="50" height="50" class="d-inline-block align-top">
-      MANGACKEET
-    </a>
-    <!-- Botón para dispositivos móviles -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- Enlaces de navegación -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="index.html">Inicio</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProductos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Categorías 
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownProductos">
-            <a class="dropdown-item" href="#">Mangas</a>
-            <a class="dropdown-item" href="#">Shonen</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="index.html">Ver todos los productos</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="contacto.html">Contacto</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPerfil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Perfil 
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownPerfil">
-            <a class="dropdown-item" href="registro.html">Registro</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="login.html">Inicio de Sesión</a>
-          </div>
-        </li>
-      </ul>
-      <!-- Lista de deseos y carrito de compras -->
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#"><i class="far fa-heart"></i></a>
-        </li>
-        <li class="nav-item">
-         <a class="nav-link" href="carrito.html"><i class="fas fa-shopping-cart"></i></a>
-        </li>
-        
-   
-      </ul>
-      <!-- Formulario de búsqueda -->
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Buscar productos" aria-label="Buscar">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
-      </form>
-      <a href="https://www.facebook.com/profile.php?id=61558172912882&is_tour_dismissed" class="btn" target="_blank">
-        <img src="https://static.vecteezy.com/system/resources/previews/018/930/476/non_2x/facebook-logo-facebook-icon-transparent-free-png.png" alt="Icono de Facebook" style="width: 40px; height: 40px; vertical-align: middle;">
-  
-      </a>
-    </div>
-  </div>
-</nav>
-
-<!-- Header -->
-<header class="bg-primary text-white text-center py-5">
-</header>
-
-
-  <!--Fila No.1-->
-
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <img src="https://mangaplus.shueisha.co.jp/drm/title/200016/title_thumbnail_portrait_list/326463.jpg?key=09dca0493596f8810787b801693fca38&duration=86400" 
-               class="card-img-top" 
-               alt="..."
-               style="width: 253px; height: 300px;"
-          > <div class="card-body">
-            <h5 class="card-title">One Piece Vol 1</h5>
-            <p class="card-text">En la Gran Era Pirata, donde los océanos rugen con la promesa de aventuras y tesoros perdidos, una leyenda brilla más que ninguna otra</p>
-            <a href="Producto1.html" class="btn btn-primary">Comprar</a>
-          </div>
-          <!-- Iconos de lista de deseos y carrito -->
-          <div class="card-footer text-right">
-            <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a> <!-- Icono de corazón para lista de deseos -->
-            <a href="#" class="btn btn-link"><i class="fas fa-shopping-cart"></i></a> <!-- Icono de carrito de compras -->
-          </div>
-          <!-- Fin de los iconos -->
-        </div>
-      </div>
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <img src="https://mangaplus.shueisha.co.jp/drm/title/200006/title_thumbnail_portrait_list/314119.jpg?key=42821e32ca678b4074da703c47cfc751&duration=86400"
-           class="card-img-top" 
-           alt="..."
-           style="width: 253px; height: 300px;">
-          <div class="card-body">
-            <h5 class="card-title">TOKYO GHOUL</h5>
-            <p class="card-text">Los habitantes de Tokio viven aterrados: en las sombras de la metrópolis se ocultan horribles monstruos que se camuflan entre la multitud, cazando y devorando seres humanos.</p>
-            <a href="#" class="btn btn-primary">Comprar</a>
-          </div>
-          <!-- Iconos de lista de deseos y carrito -->
-          <div class="card-footer text-right">
-            <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a> <!-- Icono de corazón para lista de deseos -->
-            <a href="#" class="btn btn-link"><i class="fas fa-shopping-cart"></i></a> <!-- Icono de carrito de compras -->
-          </div>
-          <!-- Fin de los iconos -->
-        </div>
-      </div>
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <img src="https://mangaplus.shueisha.co.jp/drm/title/200018/title_thumbnail_portrait_list/312841.jpg?key=71f834a71d0614525db1c7b3b4ba7ec1&duration=86400" 
-          class="card-img-top" 
-          alt="..."
-          style="width: 253px; height: 300px;">
-          <div class="card-body">
-            <h5 class="card-title">Jujutsu Kaisen</h5>
-            <p class="card-text">Yuuji Itadori, un estudiante de secundaria, que posee una rara habilidad física, pasa sus días visitando a su abuelo que se encontra hospitalizado. Pero un día, espíritus malditos que duermen en su escuela, se liberan y aparecen criaturas fantasmas. </p>
-            <a href="#" class="btn btn-primary">Comprar</a>
-          </div>
-          <!-- Iconos de lista de deseos y carrito -->
-          <div class="card-footer text-right">
-            <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a> <!-- Icono de corazón para lista de deseos -->
-            <a href="#" class="btn btn-link"><i class="fas fa-shopping-cart"></i></a> <!-- Icono de carrito de compras -->
-          </div>
-          <!-- Fin de los iconos -->
-        </div>
-      </div>
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <img src="https://mangaplus.shueisha.co.jp/drm/title/200116/title_thumbnail_portrait_list/311899.jpg?key=4579872b7ae154fc40fe54056766967a&duration=86400" 
-          class="card-img-top" 
-          alt="..."
-          style="width: 253px; height: 300px;">
-          <div class="card-body">
-            <h5 class="card-title">BORUTO - TWO BLUE VORTEX -</h5>
-            <p class="card-text">La memoria colectiva de la gente ha cambiado, y ahora la Villa de la Hoja va detrás de la vida de Boruto. Pese a las adversidades, alguien ha estado esperando junto a Sasuke después de abandonar la Villa.</p>
-            <a href="#" class="btn btn-primary">Comprar</a>
-          </div>
-          <!-- Iconos de lista de deseos y carrito -->
-          <div class="card-footer text-right">
-            <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a> <!-- Icono de corazón para lista de deseos -->
-            <a href="#" class="btn btn-link"><i class="fas fa-shopping-cart"></i></a> <!-- Icono de carrito de compras -->
-          </div>
-          <!-- Fin de los iconos -->
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!--Fila No.2-->
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <img src="https://mangaplus.shueisha.co.jp/drm/title/200098/title_thumbnail_portrait_list/312151.jpg?key=c229fb170677966c401762621b4a541c&duration=86400" 
-          class="card-img-top" 
-          alt="..."
-          style="width: 253px; height: 300px;">
-          <div class="card-body">
-            <h5 class="card-title">CHAINSAW MAN</h5>
-            <p class="card-text">Denji es un joven que alberga en su interior al demonio motosierra, ¡el mundialmente conocido Chainsaw Man!</p>
-            <a href="#" class="btn btn-primary">Comprar</a>
-          </div>
-          <!-- Iconos de lista de deseos y carrito -->
-          <div class="card-footer text-right">
-            <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a> <!-- Icono de corazón para lista de deseos -->
-            <a href="#" class="btn btn-link"><i class="fas fa-shopping-cart"></i></a> <!-- Icono de carrito de compras -->
-          </div>
-          <!-- Fin de los iconos -->
-        </div>
-      </div>
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <img src="https://mangaplus.shueisha.co.jp/drm/title/200025/title_thumbnail_portrait_list/312406.jpg?key=350f9705c583ff99be4ae788fc3eaeff&duration=86400" 
-          class="card-img-top" 
-          alt="..."
-          style="width: 253px; height: 300px;">
-          <div class="card-body">
-            <h5 class="card-title">Dragon Ball Super</h5>
-            <p class="card-text">El tiempo transcurre, desde aquella gran batalla entre Goku y Majin Boo... ¡¡Ahora, en un mundo que recuperó la paz, se aproxima una nueva batalla!</p>
-            <a href="#" class="btn btn-primary">Comprar</a>
-          </div>
-          <!-- Iconos de lista de deseos y carrito -->
-          <div class="card-footer text-right">
-            <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a> <!-- Icono de corazón para lista de deseos -->
-            <a href="#" class="btn btn-link"><i class="fas fa-shopping-cart"></i></a> <!-- Icono de carrito de compras -->
-          </div>
-          <!-- Fin de los iconos -->
-        </div>
-      </div>
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <img src="https://mangaplus.shueisha.co.jp/drm/title/200031/title_thumbnail_portrait_list/313768.jpg?key=8457a4dc26fac9f04a1e25a434e64090&duration=86400" 
-          class="card-img-top" 
-          alt="..."
-          style="width: 253px; height: 300px;">
-          <div class="card-body">
-            <h5 class="card-title">SPY x FAMILY</h5>
-            <p class="card-text">El hábil espía Tasogare se dedicaba diariamente a cumplir misiones especiales por un mundo mejor. Un día recibe un complicado desafío... Su deber es crear una familia falsa y comenzar una nueva vida para poder cumplir la misión</p>
-            <a href="#" class="btn btn-primary">Comprar</a>
-          </div>
-          <!-- Iconos de lista de deseos y carrito -->
-          <div class="card-footer text-right">
-            <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a> <!-- Icono de corazón para lista de deseos -->
-            <a href="#" class="btn btn-link"><i class="fas fa-shopping-cart"></i></a> <!-- Icono de carrito de compras -->
-          </div>
-          <!-- Fin de los iconos -->
-        </div>
-      </div>
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <img src="https://mangaplus.shueisha.co.jp/drm/title/200123/title_thumbnail_portrait_list/324558.jpg?key=3d03d7bad89d4a0f05b216365bd43dda&duration=86400" 
-          class="card-img-top" 
-          alt="..."
-          style="width: 253px; height: 300px;">
-          <div class="card-body">
-            <h5 class="card-title">Kagurabachi</h5>
-            <p class="card-text">Chihiro, un joven con aspiraciones de convertirse en un forjador de espadas, entrena todos los días bajo la tutela de su padre, un forjador de gran renombre.</p>
-            <a href="#" class="btn btn-primary">Comprar</a>
-          </div>
-          <!-- Iconos de lista de deseos y carrito -->
-          <div class="card-footer text-right">
-            <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a> <!-- Icono de corazón para lista de deseos -->
-            <a href="#" class="btn btn-link"><i class="fas fa-shopping-cart"></i></a> <!-- Icono de carrito de compras -->
-          </div>
-          <!-- Fin de los iconos -->
-        </div>
-      </div>
-    </div>
-  </div>  
-
-  <!--Fila No.3-->
-
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <img src="https://mangaplus.shueisha.co.jp/drm/title/200097/title_thumbnail_portrait_list/313576.jpg?key=5d3b6d00e18b6f5a1cf78ad53d345cbb&duration=86400" 
-          class="card-img-top" 
-          alt="..."
-          style="width: 253px; height: 300px;">
-          <div class="card-body">
-            <h5 class="card-title">RuriDragon</h5>
-            <p class="card-text">Esta es la historia de una dragona perezosa, que se esfuerza, pero preferiría no hacerlo. ¡Comienza una nueva serie!</p>
-            <a href="#" class="btn btn-primary">Comprar</a>
-          </div>
-          <!-- Iconos de lista de deseos y carrito -->
-          <div class="card-footer text-right">
-            <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a> <!-- Icono de corazón para lista de deseos -->
-            <a href="#" class="btn btn-link"><i class="fas fa-shopping-cart"></i></a> <!-- Icono de carrito de compras -->
-            
-          </div>
-          <!-- Fin de los iconos -->
-        </div>
-      </div>
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <img src="https://mangaplus.shueisha.co.jp/drm/title/200053/title_thumbnail_portrait_list/312907.jpg?key=23da1abc7a132b75118538f880ef0432&duration=86400" 
-          class="card-img-top" 
-          alt="..."
-          style="width: 253px; height: 300px;">
-          <div class="card-body">
-            <h5 class="card-title">KAIJU NO.8 (8Kaijuu)</h5>
-            <p class="card-text">¡Un hombre, descontento con el trabajo que le ha tocado librar en la vida, se ve involucrado en un inesperado evento...! ¡Se convierte en un Kaijuu, una criatura monstruosa, lo que le dará una nueva oportunidad para lograr lo que siempre soñó!</p>
-            <a href="#" class="btn btn-primary">Comprar</a>
-          </div>
-          <!-- Iconos de lista de deseos y carrito -->
-          <div class="card-footer text-right">
-            <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a> <!-- Icono de corazón para lista de deseos -->
-            <a href="#" class="btn btn-link"><i class="fas fa-shopping-cart"></i></a> <!-- Icono de carrito de compras -->
-            
-          </div>
-          <!-- Fin de los iconos -->
-        </div>
-      </div>
-    </div>
-  </div>
-<!-- Footer -->
-<footer class="bg-dark text-white text-center py-3">
-  <div class="container">
-    <p>&copy; MANGACKEET 2024</p>
-  </div>
-</footer>
-
-<!-- Bootstrap JS and dependencies -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+      #accept-cookie {
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-M595ZQX5NX"
+  ></script>
   <script>
-      document.addEventListener("DOMContentLoaded", function() {
-    var cookieMessage = document.getElementById("cookie-message");
-    var acceptCookieBtn = document.getElementById("accept-cookie");
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
 
-    // Función para ocultar el mensaje de cookies cuando se acepta
-    acceptCookieBtn.addEventListener("click", function() {
-        cookieMessage.style.display = "none";
-        // También podrías agregar aquí un código para guardar la aceptación de cookies en la sesión o en una cookie real.
-    });
-});
+    gtag("config", "G-M595ZQX5NX");
   </script>
-</body>
+  <body>
+    <div id="cookie-message" class="cookie-message">
+      Este sitio web utiliza cookies para mejorar la experiencia del usuario.
+      <button id="accept-cookie">Aceptar</button>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <!-- Logotipo -->
+        <a class="navbar-brand" href="#">
+          <img
+            src="logo.png"
+            alt="Logo"
+            width="50"
+            height="50"
+            class="d-inline-block align-top"
+          />
+          MANGACKEET
+        </a>
+        <!-- Botón para dispositivos móviles -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Enlaces de navegación -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownProductos"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Categorías
+              </a>
+              <div
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdownProductos"
+              >
+                <a class="dropdown-item" href="#">Mangas</a>
+                <a class="dropdown-item" href="#">Shonen</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="index.html"
+                  >Ver todos los productos</a
+                >
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contacto.html">Contacto</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownPerfil"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Perfil
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownPerfil">
+                <a class="dropdown-item" href="registro.html">Registro</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="login.html">Inicio de Sesión</a>
+              </div>
+            </li>
+          </ul>
+          <!-- Lista de deseos y carrito de compras -->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="far fa-heart"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="carrito.html"
+                ><i class="fas fa-shopping-cart"></i
+              ></a>
+            </li>
+          </ul>
+          <!-- Formulario de búsqueda -->
+          <form class="form-inline my-2 my-lg-0">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Buscar productos"
+              aria-label="Buscar"
+            />
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+              Buscar
+            </button>
+          </form>
+          <a
+            href="https://www.facebook.com/profile.php?id=61558172912882&is_tour_dismissed"
+            class="btn"
+            target="_blank"
+          >
+            <img
+              src="https://static.vecteezy.com/system/resources/previews/018/930/476/non_2x/facebook-logo-facebook-icon-transparent-free-png.png"
+              alt="Icono de Facebook"
+              style="width: 40px; height: 40px; vertical-align: middle"
+            />
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-primary text-white text-center py-5"></header>
+
+    <!--Fila No.1-->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img
+              src="https://mangaplus.shueisha.co.jp/drm/title/200016/title_thumbnail_portrait_list/326463.jpg?key=09dca0493596f8810787b801693fca38&duration=86400"
+              class="card-img-top"
+              alt="..."
+              style="width: 253px; height: 300px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">One Piece Vol 1</h5>
+              <p class="card-text">
+                En la Gran Era Pirata, donde los océanos rugen con la promesa de
+                aventuras y tesoros perdidos, una leyenda brilla más que ninguna
+                otra
+              </p>
+              <a href="Producto1.html" class="btn btn-primary">Comprar</a>
+            </div>
+            <!-- Iconos de lista de deseos y carrito -->
+            <div class="card-footer text-right">
+              <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a>
+              <!-- Icono de corazón para lista de deseos -->
+              <a href="#" class="btn btn-link"
+                ><i class="fas fa-shopping-cart"></i
+              ></a>
+              <!-- Icono de carrito de compras -->
+            </div>
+            <!-- Fin de los iconos -->
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img
+              src="https://mangaplus.shueisha.co.jp/drm/title/200006/title_thumbnail_portrait_list/314119.jpg?key=42821e32ca678b4074da703c47cfc751&duration=86400"
+              class="card-img-top"
+              alt="..."
+              style="width: 253px; height: 300px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">TOKYO GHOUL</h5>
+              <p class="card-text">
+                Los habitantes de Tokio viven aterrados: en las sombras de la
+                metrópolis se ocultan horribles monstruos que se camuflan entre
+                la multitud, cazando y devorando seres humanos.
+              </p>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+            <!-- Iconos de lista de deseos y carrito -->
+            <div class="card-footer text-right">
+              <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a>
+              <!-- Icono de corazón para lista de deseos -->
+              <a href="#" class="btn btn-link"
+                ><i class="fas fa-shopping-cart"></i
+              ></a>
+              <!-- Icono de carrito de compras -->
+            </div>
+            <!-- Fin de los iconos -->
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img
+              src="https://mangaplus.shueisha.co.jp/drm/title/200018/title_thumbnail_portrait_list/312841.jpg?key=71f834a71d0614525db1c7b3b4ba7ec1&duration=86400"
+              class="card-img-top"
+              alt="..."
+              style="width: 253px; height: 300px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Jujutsu Kaisen</h5>
+              <p class="card-text">
+                Yuuji Itadori, un estudiante de secundaria, que posee una rara
+                habilidad física, pasa sus días visitando a su abuelo que se
+                encontra hospitalizado. Pero un día, espíritus malditos que
+                duermen en su escuela, se liberan y aparecen criaturas
+                fantasmas.
+              </p>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+            <!-- Iconos de lista de deseos y carrito -->
+            <div class="card-footer text-right">
+              <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a>
+              <!-- Icono de corazón para lista de deseos -->
+              <a href="#" class="btn btn-link"
+                ><i class="fas fa-shopping-cart"></i
+              ></a>
+              <!-- Icono de carrito de compras -->
+            </div>
+            <!-- Fin de los iconos -->
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img
+              src="https://mangaplus.shueisha.co.jp/drm/title/200116/title_thumbnail_portrait_list/311899.jpg?key=4579872b7ae154fc40fe54056766967a&duration=86400"
+              class="card-img-top"
+              alt="..."
+              style="width: 253px; height: 300px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">BORUTO - TWO BLUE VORTEX -</h5>
+              <p class="card-text">
+                La memoria colectiva de la gente ha cambiado, y ahora la Villa
+                de la Hoja va detrás de la vida de Boruto. Pese a las
+                adversidades, alguien ha estado esperando junto a Sasuke después
+                de abandonar la Villa.
+              </p>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+            <!-- Iconos de lista de deseos y carrito -->
+            <div class="card-footer text-right">
+              <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a>
+              <!-- Icono de corazón para lista de deseos -->
+              <a href="#" class="btn btn-link"
+                ><i class="fas fa-shopping-cart"></i
+              ></a>
+              <!-- Icono de carrito de compras -->
+            </div>
+            <!-- Fin de los iconos -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Fila No.2-->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img
+              src="https://mangaplus.shueisha.co.jp/drm/title/200098/title_thumbnail_portrait_list/312151.jpg?key=c229fb170677966c401762621b4a541c&duration=86400"
+              class="card-img-top"
+              alt="..."
+              style="width: 253px; height: 300px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">CHAINSAW MAN</h5>
+              <p class="card-text">
+                Denji es un joven que alberga en su interior al demonio
+                motosierra, ¡el mundialmente conocido Chainsaw Man!
+              </p>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+            <!-- Iconos de lista de deseos y carrito -->
+            <div class="card-footer text-right">
+              <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a>
+              <!-- Icono de corazón para lista de deseos -->
+              <a href="#" class="btn btn-link"
+                ><i class="fas fa-shopping-cart"></i
+              ></a>
+              <!-- Icono de carrito de compras -->
+            </div>
+            <!-- Fin de los iconos -->
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img
+              src="https://mangaplus.shueisha.co.jp/drm/title/200025/title_thumbnail_portrait_list/312406.jpg?key=350f9705c583ff99be4ae788fc3eaeff&duration=86400"
+              class="card-img-top"
+              alt="..."
+              style="width: 253px; height: 300px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Dragon Ball Super</h5>
+              <p class="card-text">
+                El tiempo transcurre, desde aquella gran batalla entre Goku y
+                Majin Boo... ¡¡Ahora, en un mundo que recuperó la paz, se
+                aproxima una nueva batalla!
+              </p>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+            <!-- Iconos de lista de deseos y carrito -->
+            <div class="card-footer text-right">
+              <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a>
+              <!-- Icono de corazón para lista de deseos -->
+              <a href="#" class="btn btn-link"
+                ><i class="fas fa-shopping-cart"></i
+              ></a>
+              <!-- Icono de carrito de compras -->
+            </div>
+            <!-- Fin de los iconos -->
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img
+              src="https://mangaplus.shueisha.co.jp/drm/title/200031/title_thumbnail_portrait_list/313768.jpg?key=8457a4dc26fac9f04a1e25a434e64090&duration=86400"
+              class="card-img-top"
+              alt="..."
+              style="width: 253px; height: 300px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">SPY x FAMILY</h5>
+              <p class="card-text">
+                El hábil espía Tasogare se dedicaba diariamente a cumplir
+                misiones especiales por un mundo mejor. Un día recibe un
+                complicado desafío... Su deber es crear una familia falsa y
+                comenzar una nueva vida para poder cumplir la misión
+              </p>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+            <!-- Iconos de lista de deseos y carrito -->
+            <div class="card-footer text-right">
+              <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a>
+              <!-- Icono de corazón para lista de deseos -->
+              <a href="#" class="btn btn-link"
+                ><i class="fas fa-shopping-cart"></i
+              ></a>
+              <!-- Icono de carrito de compras -->
+            </div>
+            <!-- Fin de los iconos -->
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img
+              src="https://mangaplus.shueisha.co.jp/drm/title/200123/title_thumbnail_portrait_list/324558.jpg?key=3d03d7bad89d4a0f05b216365bd43dda&duration=86400"
+              class="card-img-top"
+              alt="..."
+              style="width: 253px; height: 300px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Kagurabachi</h5>
+              <p class="card-text">
+                Chihiro, un joven con aspiraciones de convertirse en un forjador
+                de espadas, entrena todos los días bajo la tutela de su padre,
+                un forjador de gran renombre.
+              </p>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+            <!-- Iconos de lista de deseos y carrito -->
+            <div class="card-footer text-right">
+              <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a>
+              <!-- Icono de corazón para lista de deseos -->
+              <a href="#" class="btn btn-link"
+                ><i class="fas fa-shopping-cart"></i
+              ></a>
+              <!-- Icono de carrito de compras -->
+            </div>
+            <!-- Fin de los iconos -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Fila No.3-->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img
+              src="https://mangaplus.shueisha.co.jp/drm/title/200097/title_thumbnail_portrait_list/313576.jpg?key=5d3b6d00e18b6f5a1cf78ad53d345cbb&duration=86400"
+              class="card-img-top"
+              alt="..."
+              style="width: 253px; height: 300px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">RuriDragon</h5>
+              <p class="card-text">
+                Esta es la historia de una dragona perezosa, que se esfuerza,
+                pero preferiría no hacerlo. ¡Comienza una nueva serie!
+              </p>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+            <!-- Iconos de lista de deseos y carrito -->
+            <div class="card-footer text-right">
+              <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a>
+              <!-- Icono de corazón para lista de deseos -->
+              <a href="#" class="btn btn-link"
+                ><i class="fas fa-shopping-cart"></i
+              ></a>
+              <!-- Icono de carrito de compras -->
+            </div>
+            <!-- Fin de los iconos -->
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img
+              src="https://mangaplus.shueisha.co.jp/drm/title/200053/title_thumbnail_portrait_list/312907.jpg?key=23da1abc7a132b75118538f880ef0432&duration=86400"
+              class="card-img-top"
+              alt="..."
+              style="width: 253px; height: 300px"
+            />
+            <div class="card-body">
+              <h5 class="card-title">KAIJU NO.8 (8Kaijuu)</h5>
+              <p class="card-text">
+                ¡Un hombre, descontento con el trabajo que le ha tocado librar
+                en la vida, se ve involucrado en un inesperado evento...! ¡Se
+                convierte en un Kaijuu, una criatura monstruosa, lo que le dará
+                una nueva oportunidad para lograr lo que siempre soñó!
+              </p>
+              <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+            <!-- Iconos de lista de deseos y carrito -->
+            <div class="card-footer text-right">
+              <a href="#" class="btn btn-link"><i class="fas fa-heart"></i></a>
+              <!-- Icono de corazón para lista de deseos -->
+              <a href="#" class="btn btn-link"
+                ><i class="fas fa-shopping-cart"></i
+              ></a>
+              <!-- Icono de carrito de compras -->
+            </div>
+            <!-- Fin de los iconos -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+      <div class="container">
+        <p>&copy; MANGACKEET 2024</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var cookieMessage = document.getElementById("cookie-message");
+        var acceptCookieBtn = document.getElementById("accept-cookie");
+
+        // Función para ocultar el mensaje de cookies cuando se acepta
+        acceptCookieBtn.addEventListener("click", function () {
+          cookieMessage.style.display = "none";
+          // También podrías agregar aquí un código para guardar la aceptación de cookies en la sesión o en una cookie real.
+        });
+      });
+    </script>
+  </body>
 </html>
