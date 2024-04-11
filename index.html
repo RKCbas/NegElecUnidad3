@@ -28,6 +28,29 @@
       background-color: #e1e5ea;
       color: #dae4ef;
     }
+    .cookie-message {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+#accept-cookie {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
   </style>
 </head>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-M595ZQX5NX"></script>
@@ -39,7 +62,9 @@
   gtag('config', 'G-M595ZQX5NX');
 </script>
 <body>
-
+<div id="cookie-message" class="cookie-message">
+        Este sitio web utiliza cookies para mejorar la experiencia del usuario. <button id="accept-cookie">Aceptar</button>
+    </div>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
@@ -335,5 +360,17 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+    var cookieMessage = document.getElementById("cookie-message");
+    var acceptCookieBtn = document.getElementById("accept-cookie");
+
+    // Función para ocultar el mensaje de cookies cuando se acepta
+    acceptCookieBtn.addEventListener("click", function() {
+        cookieMessage.style.display = "none";
+        // También podrías agregar aquí un código para guardar la aceptación de cookies en la sesión o en una cookie real.
+    });
+});
+  </script>
 </body>
 </html>
