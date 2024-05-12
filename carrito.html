@@ -126,28 +126,14 @@
           <thead>
             <tr>
               <th>Producto</th>
+              <th>Descripción</th>
               <th>Precio</th>
-              <th>Cantidad</th>
-              <th>Total</th>
+              <th>Categoría</th>
+              <th>Acciones</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Producto 1</td>
-              <td>$20.00</td>
-              <td>2</td>
-              <td>$40.00</td>
-            </tr>
-            <tr>
-              <td>Producto 2</td>
-              <td>$30.00</td>
-              <td>1</td>
-              <td>$30.00</td>
-            </tr>
-            <tr>
-              <td colspan="3" class="total">Total</td>
-              <td>$70.00</td>
-            </tr>
+          <tbody id="wishlist-items">
+            <!-- Aquí se generan dinámicamente los elementos de la lista de deseos -->
           </tbody>
         </table>
       </div>
@@ -167,5 +153,54 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    var wishlist = [];
+    $(document).ready(function(){
+    var wishlistItems = $('#wishlist-items');
+    // Obtiene la lista de deseos del localStorage
+    wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    // Itera sobre los productos en la lista de deseos y los agrega a la tabla
+    wishlist.forEach(function(product){
+        var row = '<tr>';
+        row += '<td>' + product.title + '</td>';
+        row += '<td>' + product.description + '</td>';
+        row += '<td>$' + product.price.toFixed(2) + '</td>';
+        row += '<td>' + product.category + '</td>';
+        row += '<td><button class="btn btn-danger btn-sm" onclick="removeFromWishlist(' + product.id + ')">Eliminar</button></td>';
+        row += '</tr>';
+        wishlistItems.append(row);
+    });
+    });
+
+
+    // Función para eliminar un producto de la lista de deseos
+    function removeFromWishlist(productId){
+    // Encuentra el índice del producto en la lista de deseos
+    var index = wishlist.findIndex(function(product){
+        return product.id === productId;
+    });
+    
+    if(index !== -1){
+        // Elimina el producto del arreglo wishlist
+        wishlist.splice(index, 1);
+        // Actualiza el localStorage con la nueva lista de deseos
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        // Elimina la fila de la tabla de deseos
+        $('#wishlist-items').empty();
+        // Vuelve a generar las filas de la tabla con la lista actualizada de deseos
+        wishlist.forEach(function(product){
+            var row = '<tr>';
+            row += '<td>' + product.title + '</td>';
+            row += '<td>' + product.description + '</td>';
+            row += '<td>$' + product.price.toFixed(2) + '</td>';
+            row += '<td>' + product.category + '</td>';
+            row += '<td><button class="btn btn-danger btn-sm" onclick="removeFromWishlist(' + product.id + ')">Eliminar</button></td>';
+            row += '</tr>';
+            $('#wishlist-items').append(row);
+        });
+    }
+    }
+  </script>
+
 </body>
 </html>

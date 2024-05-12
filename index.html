@@ -251,6 +251,15 @@
         }
       }
 
+      function addToCart(product){
+        if(product){
+          let cart = JSON.parse(localStorage.getItem("cart")) || [];
+          cart.push(product);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          alert('Producto agregado al carrito');
+        }
+      }
+
       fetch("productos.json")
         .then((response) => response.json())
         .then((data) => {
@@ -327,6 +336,9 @@
             const carrit = document.createElement("i");
             carrit.classList.add("fas", "fa-shopping-cart");
             carritoBTN.appendChild(carrit);
+            carritoBTN.addEventListener("click", function(){
+              addToCart(product);
+            });
             card_footer.appendChild(carritoBTN);
             productCard.appendChild(card_footer);
 
