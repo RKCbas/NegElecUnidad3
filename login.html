@@ -59,6 +59,25 @@
         color: rgb(73, 63, 63);
       }
     </style>
+    <script>
+      function validarCredenciales() {
+        // Obtener los valores de usuario y contraseña del formulario
+        var usuario = document.getElementById("username").value;
+        var contraseña = document.getElementById("password").value;
+
+        // Verificar las credenciales
+        if (usuario === "Admin" && contraseña === "12345678") {
+          // Si las credenciales son correctas, redirigir a panelAdmin.html
+          window.location.href = "panelAdmin.html";
+        } else {
+          // Si las credenciales son incorrectas, redirigir a index.html
+          window.location.href = "index.html";
+        }
+
+        // Evitar que el formulario se envíe normalmente
+        return false;
+      }
+    </script>
   </head>
   <script
     async
@@ -75,7 +94,7 @@
   </script>
   <body>
     <div id="login-container">
-      <form action="index.html" method="get">
+      <form onsubmit="return validarCredenciales()">
         <h2>Ingresa tu correo y contraseña para iniciar sesion</h2>
         <input
           type="text"
