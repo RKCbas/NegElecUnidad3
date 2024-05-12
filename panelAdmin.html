@@ -1,11 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    .container {
+      max-width: 1200px;
+    }
+    .product-column,
+    .user-column {
+      padding: 0 10px;
+    }
+    .card {
+      margin-bottom: 20px;
+    }
+    .card-title {
+      font-size: 24px;
+      margin-bottom: 0;
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .card-footer {
+      padding: 10px 20px;
+      background-color: #f8f9fa;
+    }
+    .btn-edit,
+    .btn-delete {
+      margin-right: 10px;
+    }
+    .thumbnail {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
 </head>
 <body>
-    <h5>Hola mundo</h5>
+  <div class="container mt-5">
+    <h2 class="mb-4">Panel de Administración</h2>
+    <div class="row">
+      <!-- Columna de usuarios -->
+      <div class="col-md-4 user-column" id="user-container">
+        <h3>Usuarios</h3>
+        <ul class="list-group" id="user-list">
+          <!-- Los usuarios se cargarán aquí -->
+        </ul>
+      </div>
+
+      <!-- Columna de productos -->
+      <div class="col-md-8 product-column" id="product-container">
+        <h3>Productos</h3>
+        <div class="row" id="product-list">
+          <!-- Los productos se cargarán aquí -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS y dependencias -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const userContainer = document.getElementById("user-list");
+      const productContainer = document.getElementById("product-list");
+
+      // Función para mostrar los usuarios
+      function showUsers(users) {
+        users.forEach((user) => {
+          const listItem = document.createElement("li");
+          listItem.classList.add("list-group-item");
+          listItem.textContent = user.name + " - " + user.email;
+          userContainer.appendChild(listItem);
+        });
+      }
+
+      // Función para mostrar los productos
+      function showProducts(products) {
+        products.forEach((product) => {
+          const card = document.createElement("div");
+          card.classList.add("col-md-4");
+
+          const productCard = document.createElement("div");
+          productCard.classList.add("card");
+
+          const thumbnail = document.createElement("img");
+          thumbnail.classList.add("card-img-top", "thumbnail");
+          thumbnail.src = product.thumbnail;
+          thumbnail.alt = product.title;
+          productCard.appendChild(thumbnail);
+
+          const cardBody = document.createElement("div");
+          cardBody.classList.add("card-body");
+
+          const cardTitle = document.createElement("h5");
+          cardTitle.classList.add("card-title");
+          cardTitle.textContent = product.title;
+          cardBody.appendChild(cardTitle);
+
+          const cardText = document.createElement("p");
+          cardText.classList.add("card-text");
+          cardText.textContent = product.description;
+          cardBody.appendChild(cardText);
+
+          productCard.appendChild(cardBody);
+
+          const cardFooter = document.createElement("div");
+          cardFooter.classList.add("card-footer");
+
+          const editButton = document.createElement("button");
+          editButton.classList.add("btn", "btn-primary", "btn-edit");
+          editButton.innerHTML = '<i class="fas fa-edit"></i> Editar';
+          cardFooter.appendChild(editButton);
+
+          const deleteButton = document.createElement("button");
+          deleteButton.classList.add("btn", "btn-danger", "btn-delete");
+          deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Eliminar';
+          cardFooter.appendChild(deleteButton);
+
+          productCard.appendChild(cardFooter);
+
+          card.appendChild(productCard);
+          productContainer.appendChild(card);
+        });
+      }
+
+      // Simulación de datos de usuarios
+      const users = [
+        { name: "Usuario 1", email: "usuario1@example.com" },
+        { name: "Usuario 2", email: "usuario2@example.com" },
+        { name: "Usuario 3", email: "usuario3@example.com" }
+      ];
+
+      // Mostrar usuarios y productos
+      showUsers(users);
+
+      // Realiza una solicitud HTTP para obtener el archivo JSON de productos
+      fetch('productos.json')
+        .then(response => response.json())
+        .then(data => {
+          // Una vez que se obtienen los datos, llama a la función showProducts
+          showProducts(data.products);
+        })
+        .catch(error => console.error('Error al obtener los productos:', error));
+    });
+  </script>
 </body>
 </html>
