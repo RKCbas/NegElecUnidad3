@@ -184,7 +184,7 @@
           <!-- Lista de deseos y carrito de compras -->
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#" title="Lista de deseos"
+              <a class="nav-link" href="listadeseos.html" title="Lista de deseos"
                 ><i class="far fa-heart"></i
               ></a>
             </li>
@@ -236,6 +236,21 @@
       let container = null;
       let row = null;
       let ind = 0;
+
+      // Definir la función addToWishlist fuera del bloque del fetch
+      function addToWishlist(productId, products) {
+        // Obtiene el producto del JSON usando el productId
+        const product = products.find(p => p.id === productId);
+        if (product) {
+          // Agrega el producto a localStorage (lista de deseos)
+          let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+          wishlist.push(product);
+          localStorage.setItem("wishlist", JSON.stringify(wishlist));
+          // Notifica al usuario que el producto se ha agregado a la lista de deseos
+          alert('Producto agregado a la lista de deseos');
+        }
+      }
+
       fetch("productos.json")
         .then((response) => response.json())
         .then((data) => {
@@ -292,14 +307,19 @@
             const nb = document.createElement("span");
             nb.textContent = "\u00A0".repeat(8);
             card_footer.appendChild(nb);
-            const deseosBTN = document.createElement("a");
-            deseosBTN.href = "#";
-            deseosBTN.classList.add("btn", "btn-link");
-            deseosBTN.title = "deseos btn";
+
+            const addToWishlistBtn = document.createElement("a");
+            addToWishlistBtn.href = "#";
+            addToWishlistBtn.classList.add("btn", "btn-link");
+            addToWishlistBtn.title = "addToWishlistBtn";
             const cora = document.createElement("i");
             cora.classList.add("fas", "fa-heart");
-            deseosBTN.appendChild(cora);
-            card_footer.appendChild(deseosBTN);
+            addToWishlistBtn.appendChild(cora);
+            addToWishlistBtn.addEventListener("click", function() {
+              addToWishlist(product.id, data.products);
+            });
+            card_footer.appendChild(addToWishlistBtn);
+
             const carritoBTN = document.createElement("a");
             carritoBTN.href = "#";
             carritoBTN.classList.add("btn", "btn-link");
