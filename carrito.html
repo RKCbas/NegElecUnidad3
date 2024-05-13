@@ -127,13 +127,14 @@
             <tr>
               <th>Producto</th>
               <th>Descripción</th>
+              <th>Cantidad</th>
               <th>Precio</th>
               <th>Categoría</th>
               <th>Acciones</th>
             </tr>
           </thead>
-          <tbody id="wishlist-items">
-            <!-- Aquí se generan dinámicamente los elementos de la lista de deseos -->
+          <tbody id="cart-items">
+            
           </tbody>
         </table>
       </div>
@@ -141,7 +142,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Resumen de compra</h5>
-            <p class="card-text">Total: $70.00</p>
+            <p class="card-text">Total: $<span id="total"></span></span></p>
             <a href="#" class="btn btn-primary btn-block">Continuar con el pago</a>
           </div>
         </div>
@@ -154,50 +155,61 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
-    var wishlist = [];
+    var total = document.getElementById("total");
+    var suma = 0;
+    var cart = [];
     $(document).ready(function(){
-    var wishlistItems = $('#wishlist-items');
-    // Obtiene la lista de deseos del localStorage
-    wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-    // Itera sobre los productos en la lista de deseos y los agrega a la tabla
-    wishlist.forEach(function(product){
+    var cartItems = $('#cart-items');
+    // Obtiene el carrito del localStorage
+    cart = JSON.parse(localStorage.getItem("cart")) || [];
+    // Itera sobre los productos del carrito y los agrega a la tabla
+    cart.forEach(function(product){
+        
         var row = '<tr>';
         row += '<td>' + product.title + '</td>';
         row += '<td>' + product.description + '</td>';
+        row += '<td>' + product.quantity + '</td>';
         row += '<td>$' + product.price.toFixed(2) + '</td>';
         row += '<td>' + product.category + '</td>';
-        row += '<td><button class="btn btn-danger btn-sm" onclick="removeFromWishlist(' + product.id + ')">Eliminar</button></td>';
+        row += '<td><button class="btn btn-danger btn-sm" onclick="removeFromCart(' + product.id + ')">Eliminar</button></td>';
         row += '</tr>';
-        wishlistItems.append(row);
+        cartItems.append(row);
+        suma += (product.price.toFixed(2) * product.quantity);
     });
+    total.textContent = suma;
     });
 
+    
 
-    // Función para eliminar un producto de la lista de deseos
-    function removeFromWishlist(productId){
-    // Encuentra el índice del producto en la lista de deseos
-    var index = wishlist.findIndex(function(product){
+    // Función para eliminar un producto del carrito
+    function removeFromCart(productId){
+    // Encuentra el índice del producto en el carrito
+    var index = cart.findIndex(function(product){
         return product.id === productId;
     });
     
-    if(index !== -1){
-        // Elimina el producto del arreglo wishlist
-        wishlist.splice(index, 1);
-        // Actualiza el localStorage con la nueva lista de deseos
-        localStorage.setItem("wishlist", JSON.stringify(wishlist));
-        // Elimina la fila de la tabla de deseos
-        $('#wishlist-items').empty();
-        // Vuelve a generar las filas de la tabla con la lista actualizada de deseos
-        wishlist.forEach(function(product){
+    if(index !== -1){ 
+        suma = 0;
+        // Elimina el producto del carrito
+        cart.splice(index, 1);
+        // actualzia el carrito
+        localStorage.setItem("cart", JSON.stringify(cart));
+        // Vacia el carrito
+        $('#cart-items').empty();
+        // Vuelve a llenar el carrito
+        cart.forEach(function(product){
             var row = '<tr>';
             row += '<td>' + product.title + '</td>';
             row += '<td>' + product.description + '</td>';
             row += '<td>$' + product.price.toFixed(2) + '</td>';
             row += '<td>' + product.category + '</td>';
+            row += '<td>' + product.category + '</td>';
             row += '<td><button class="btn btn-danger btn-sm" onclick="removeFromWishlist(' + product.id + ')">Eliminar</button></td>';
             row += '</tr>';
-            $('#wishlist-items').append(row);
+            $('#cart-items').append(row);
+            suma += (product.price.toFixed(2) * product.quantity);
         });
+        total.textContent = suma;
     }
     }
   </script>

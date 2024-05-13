@@ -184,7 +184,10 @@
           <!-- Lista de deseos y carrito de compras -->
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="listadeseos.html" title="Lista de deseos"
+              <a
+                class="nav-link"
+                href="listadeseos.html"
+                title="Lista de deseos"
                 ><i class="far fa-heart"></i
               ></a>
             </li>
@@ -240,23 +243,39 @@
       // Definir la función addToWishlist fuera del bloque del fetch
       function addToWishlist(productId, products) {
         // Obtiene el producto del JSON usando el productId
-        const product = products.find(p => p.id === productId);
+        const product = products.find((p) => p.id === productId);
         if (product) {
           // Agrega el producto a localStorage (lista de deseos)
           let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
           wishlist.push(product);
           localStorage.setItem("wishlist", JSON.stringify(wishlist));
           // Notifica al usuario que el producto se ha agregado a la lista de deseos
-          alert('Producto agregado a la lista de deseos');
+          alert("Producto agregado a la lista de deseos");
         }
       }
 
-      function addToCart(product){
-        if(product){
+      function addToCart(product) {
+        if (product) {
           let cart = JSON.parse(localStorage.getItem("cart")) || [];
-          cart.push(product);
+          let found = false;
+
+          for (let item of cart) {
+            console.log(item);
+            if (item.id === product.id) {
+              item.quantity++;
+              found = true;
+              break;
+            }
+          }
+
+          if (!found) {
+            product.quantity = 1;
+            console.log(product);
+            cart.push(product);
+          }
+
           localStorage.setItem("cart", JSON.stringify(cart));
-          alert('Producto agregado al carrito');
+          alert("Producto agregado al carrito");
         }
       }
 
@@ -324,7 +343,7 @@
             const cora = document.createElement("i");
             cora.classList.add("fas", "fa-heart");
             addToWishlistBtn.appendChild(cora);
-            addToWishlistBtn.addEventListener("click", function() {
+            addToWishlistBtn.addEventListener("click", function () {
               addToWishlist(product.id, data.products);
             });
             card_footer.appendChild(addToWishlistBtn);
@@ -336,7 +355,7 @@
             const carrit = document.createElement("i");
             carrit.classList.add("fas", "fa-shopping-cart");
             carritoBTN.appendChild(carrit);
-            carritoBTN.addEventListener("click", function(){
+            carritoBTN.addEventListener("click", function () {
               addToCart(product);
             });
             card_footer.appendChild(carritoBTN);
