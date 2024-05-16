@@ -320,7 +320,7 @@
             card_body.appendChild(card_title);
             const card_text = document.createElement("p");
             card_text.classList.add("card-text");
-            card_text.textContent = product.description;
+            card_text.textContent = product.description + "\n" + product.price;
             card_body.appendChild(card_text);
             productCard.appendChild(card_body);
 
