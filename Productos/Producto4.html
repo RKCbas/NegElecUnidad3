@@ -48,7 +48,7 @@
 
     gtag("config", "G-M595ZQX5NX");
   </script>
-  <body>
+  <body onload="cantidad()">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
@@ -132,7 +132,7 @@
           <!-- Lista de deseos y carrito de compras -->
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="far fa-heart"></i></a>
+              <a class="nav-link" href="../listadeseos.html"><i class="far fa-heart"></i></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../carrito.html"
@@ -245,7 +245,7 @@
               Boruto. Pese a las adversidades, alguien ha estado esperando junto
               a Sasuke después de abandonar la Villa.
             </p>
-            <p><strong>Cantidad Disponible:</strong> 100 unidades</p>
+            <p id="Ncant"><strong>Cantidad Disponible:</strong></p>
             <!-- Formulario para seleccionar la cantidad -->
             <form>
               <div class="form-group">
@@ -255,14 +255,21 @@
                   class="form-control"
                   id="cantidad"
                   min="1"
-                  max="100"
                   value="1"
                 />
               </div>
-              <button type="submit" class="btn btn-primary mr-2">
+              <button
+                type="submit"
+                class="btn btn-primary mr-2"
+                onclick="addToCart()"
+              >
                 <i class="fas fa-cart-plus"></i> Añadir al Carrito
               </button>
-              <button type="submit" class="btn btn-danger">
+              <button
+                type="submit"
+                class="btn btn-danger"
+                onclick="addToWishlist()"
+              >
                 <i class="far fa-heart"></i> Añadir a Favoritos
               </button>
             </form>
@@ -334,6 +341,84 @@
         </a>
       </div>
     </footer>
+    <script>
+      function addToWishlist() {
+        fetch("../productos.json")
+          .then((response) => response.json())
+          .then((data) => {
+            const product = data.products.find((p) => p.id === 4);
+            if (product) {
+              let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+              const ptemp = wishlist.find((pt) => pt.id === product.id);
+              if (ptemp) {
+                alert("El producto ya se encuentra en la lista de deseos");
+              } else {
+                wishlist.push(product);
+                localStorage.setItem("wishlist", JSON.stringify(wishlist));
+                // Notifica al usuario que el producto se ha agregado a la lista de deseos
+                alert("Producto agregado a la lista de deseos");
+              }
+            }
+          })
+          .catch((error) => {
+            console.error("Error al obtener los datos:", error);
+          });
+      }
+
+      function addToCart() {
+        fetch("../productos.json")
+          .then((response) => response.json())
+          .then((data) => {
+            const product = data.products.find((p) => p.id === 4);
+            if (product) {
+              const cantidad = document.getElementById("cantidad");
+              let cantAgr = cantidad.value;
+              let cart = JSON.parse(localStorage.getItem("cart")) || [];
+              let found = false;
+
+              for (let item of cart) {
+                // console.log(item);
+                if (item.id === product.id) {
+                  item.quantity = parseInt(item.quantity) + parseInt(cantAgr);
+                  found = true;
+                  break;
+                }
+              }
+
+              if (!found) {
+                product.quantity = cantAgr;
+                console.log(product);
+                cart.push(product);
+              }
+
+              localStorage.setItem("cart", JSON.stringify(cart));
+              alert("Producto agregado al carrito");
+              window.location.href = "../index.html";
+            }
+          })
+          .catch((error) => {
+            console.error("Error al obtener los datos:", error);
+          });
+      }
+
+      function cantidad() {
+        fetch("../productos.json")
+          .then((response) => response.json())
+          .then((data) => {
+            const product = data.products.find((p) => p.id === 4);
+            const Ncant = document.getElementById("Ncant");
+            const text = document.createElement("span");
+            text.textContent = " " + product.stock + " Unidades";
+            Ncant.appendChild(text);
+            const cantidad = document.getElementById("cantidad");
+            cantidad.max = product.stock;
+            // console.log(product.stock);
+          })
+          .catch((error) => {
+            console.error("Error al obtener los datos:", error);
+          });
+      }
+    </script>
 
     <!-- Bootstrap JS y dependencias -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

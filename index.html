@@ -205,7 +205,7 @@
               placeholder="Buscar productos"
               aria-label="Buscar"
             />
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+            <button class="btn btn-outline-light my-2 my-sm-0" style="color: black;" type="submit">
               Buscar
             </button>
           </form>
@@ -247,10 +247,15 @@
         if (product) {
           // Agrega el producto a localStorage (lista de deseos)
           let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-          wishlist.push(product);
-          localStorage.setItem("wishlist", JSON.stringify(wishlist));
-          // Notifica al usuario que el producto se ha agregado a la lista de deseos
-          alert("Producto agregado a la lista de deseos");
+          const ptemp = wishlist.find((pt) => pt.id === product.id);
+          if (ptemp) {
+            alert("El producto ya se encuentra en la lista de deseos");
+          } else {
+            wishlist.push(product);
+            localStorage.setItem("wishlist", JSON.stringify(wishlist));
+            // Notifica al usuario que el producto se ha agregado a la lista de deseos
+            alert("Producto agregado a la lista de deseos");
+          }
         }
       }
 
@@ -260,7 +265,7 @@
           let found = false;
 
           for (let item of cart) {
-            console.log(item);
+            // console.log(item);
             if (item.id === product.id) {
               item.quantity++;
               found = true;
@@ -322,6 +327,10 @@
             card_text.classList.add("card-text");
             card_text.textContent = product.description;
             card_body.appendChild(card_text);
+            let prec = document.createElement("p");
+            prec.classList.add("card-text");
+            prec.textContent = "Precio: $" + product.price + ".00";
+            card_body.appendChild(prec);
             productCard.appendChild(card_body);
 
             const card_footer = document.createElement("div");
