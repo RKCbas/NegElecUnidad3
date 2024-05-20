@@ -202,18 +202,34 @@
     </a>
   </li>
           </ul>
-          <!-- Formulario de búsqueda -->
-          <form class="form-inline my-2 my-lg-0">
-            <input
-              class="form-control mr-sm-2"
-              type="search"
-              placeholder="Buscar productos"
-              aria-label="Buscar"
-            />
-            <button class="btn btn-outline-light my-2 my-sm-0" style="color: black;" type="submit">
-              Buscar
-            </button>
-          </form>
+ 
+<form class="form-inline my-2 my-lg-0" id="search-form">
+  <input
+    class="form-control mr-sm-2"
+    type="search"
+    id="search-input"
+    placeholder="Buscar productos"
+    aria-label="Buscar"
+  />
+  <input
+    class="form-control mr-sm-2"
+    type="number"
+    id="min-price"
+    placeholder="Precio mínimo"
+    aria-label="Precio mínimo"
+  />
+  <input
+    class="form-control mr-sm-2"
+    type="number"
+    id="max-price"
+    placeholder="Precio máximo"
+    aria-label="Precio máximo"
+  />
+  <button class="btn btn-outline-light my-2 my-sm-0" style="color: black;" type="submit">
+    Buscar
+  </button>
+</form>
+
           <a
             href="https://www.facebook.com/profile.php?id=61558172912882&is_tour_dismissed"
             class="btn"
@@ -392,6 +408,143 @@
         .catch((error) => {
           console.error("Error al obtener los datos:", error);
         });
+
+        document.getElementById("search-form").addEventListener("submit", function (event) {
+  event.preventDefault(); // Prevenir el envío del formulario
+
+  const searchInput = document.getElementById("search-input").value.toLowerCase();
+  const minPrice = parseFloat(document.getElementById("min-price").value) || 0;
+  const maxPrice = parseFloat(document.getElementById("max-price").value) || Infinity;
+
+  fetch("productos.json")
+    .then((response) => response.json())
+    .then((data) => {
+      const filteredProducts = data.products.filter((product) => {
+        const matchesSearch = product.title.toLowerCase().includes(searchInput) || product.description.toLowerCase().includes(searchInput);
+        const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
+        return matchesSearch && matchesPrice;
+      });
+
+      displayProducts(filteredProducts);
+    })
+    .catch((error) => {
+      console.error("Error al obtener los datos:", error);
+    });
+});
+
+function displayProducts(products) {
+  const productContainer = document.getElementById("product-container");
+  productContainer.innerHTML = ""; // Limpiar el contenedor de productos
+
+  if (products.length === 0) {
+    productContainer.innerHTML = "<p>No se encontraron productos</p>";
+    return;
+  }
+
+  let container = null;
+  let row = null;
+  let ind = 0;
+
+  products.forEach((product) => {
+    if (ind === 0) {
+      container = document.createElement("div");
+      container.classList.add("container");
+      row = document.createElement("div");
+      row.classList.add("row");
+      container.appendChild(row);
+      productContainer.appendChild(container);
+    }
+
+    const col = document.createElement("div");
+    col.classList.add("col-md-3", "mb-4");
+
+    const productCard = document.createElement("div");
+    productCard.classList.add("card");
+
+    const thumbnail = document.createElement("img");
+    thumbnail.classList.add("card-img-top");
+    thumbnail.src = product.thumbnail;
+    thumbnail.alt = "imagen de " + product.title;
+    thumbnail.title = product.title;
+    thumbnail.style.width = "253px";
+    thumbnail.style.height = "300px";
+    productCard.appendChild(thumbnail);
+
+    const card_body = document.createElement("div");
+    card_body.classList.add("card-body");
+    const card_title = document.createElement("h5");
+    card_title.classList.add("card-title");
+    card_title.textContent = product.title;
+    card_body.appendChild(card_title);
+    const card_text = document.createElement("p");
+    card_text.classList.add("card-text");
+    card_text.textContent = product.description;
+    card_body.appendChild(card_text);
+    let prec = document.createElement("p");
+    prec.classList.add("card-text");
+    prec.textContent = "Precio: $" + product.price + ".00";
+    card_body.appendChild(prec);
+    productCard.appendChild(card_body);
+
+    const card_footer = document.createElement("div");
+    card_footer.classList.add("card-footer", "text-right");
+    const btn_link = document.createElement("a");
+    btn_link.classList.add("btn", "btn-primary");
+    btn_link.title = "comprar btn";
+    btn_link.textContent = "Comprar";
+    btn_link.href = product.link;
+    card_footer.appendChild(btn_link);
+    const nb = document.createElement("span");
+    nb.textContent = "\u00A0".repeat(8);
+    card_footer.appendChild(nb);
+
+    const addToWishlistBtn = document.createElement("a");
+    addToWishlistBtn.href = "#";
+    addToWishlistBtn.classList.add("btn", "btn-link");
+    addToWishlistBtn.title = "addToWishlistBtn";
+    const cora = document.createElement("i");
+    cora.classList.add("fas", "fa-heart");
+    addToWishlistBtn.appendChild(cora);
+    addToWishlistBtn.addEventListener("click", function () {
+      addToWishlist(product.id, products);
+    });
+    card_footer.appendChild(addToWishlistBtn);
+
+    const carritoBTN = document.createElement("a");
+    carritoBTN.href = "#";
+    carritoBTN.classList.add("btn", "btn-link");
+    card_body.title = "Carrito BTN";
+    const carrit = document.createElement("i");
+    carrit.classList.add("fas", "fa-shopping-cart");
+    carritoBTN.appendChild(carrit);
+    carritoBTN.addEventListener("click", function () {
+      addToCart(product);
+    });
+    card_footer.appendChild(carritoBTN);
+    productCard.appendChild(card_footer);
+
+    col.appendChild(productCard);
+
+    row.appendChild(col);
+
+    if (ind === 3) {
+      ind = 0;
+    } else {
+      ind++;
+    }
+  });
+}
+
+// Inicialización al cargar la página
+fetch("productos.json")
+  .then((response) => response.json())
+  .then((data) => {
+    displayProducts(data.products);
+  })
+  .catch((error) => {
+    console.error("Error al obtener los datos:", error);
+  });
+
     </script>
 
     <!-- Footer -->
