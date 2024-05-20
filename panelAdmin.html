@@ -42,17 +42,19 @@
 </head>
 <body>
   <div class="container mt-5">
-    <h2 class="mb-4">Panel de Administración</h2>
+    <div class="header">
+      <h2 class="mb-4">Panel de Administración</h2>
+      <a href="login.html" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Ir a Login</a>
+      <a href="index.html" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Ir a Pagina de Inicio</a>
+
+    </div>
     <div class="row">
-      <!-- Columna de usuarios -->
       <div class="col-md-4 user-column" id="user-container">
         <h3>Usuarios</h3>
         <ul class="list-group" id="user-list">
-          <!-- Los usuarios se cargarán aquí -->
         </ul>
       </div>
 
-      <!-- Columna de productos -->
       <div class="col-md-8 product-column" id="product-container">
         <h3>Productos</h3>
         <div class="row" id="product-list">
