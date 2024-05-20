@@ -125,13 +125,7 @@
           deleteButton.addEventListener("click", function () {
             // Eliminar el producto del DOM
             card.remove();
-            // Opcional: Realizar una solicitud HTTP para eliminar el producto del servidor
-            // fetch(`/api/deleteProduct/${product.id}`, { method: 'DELETE' })
-            //   .then(response => response.json())
-            //   .then(data => {
-            //     console.log('Producto eliminado:', data);
-            //   })
-            //   .catch(error => console.error('Error al eliminar el producto:', error));
+         
           });
           cardFooter.appendChild(deleteButton);
 
@@ -144,9 +138,10 @@
 
       // Simulación de datos de usuarios
       const users = [
-        { name: "Usuario 1", email: "usuario1@example.com" },
-        { name: "Usuario 2", email: "usuario2@example.com" },
-        { name: "Usuario 3", email: "usuario3@example.com" }
+      { name: "Marco Sebastián Hernández Parada", email: "Marco@example.com" },
+        { name: "Juan Pablo Salazar González", email: "Juan@example.com" },
+        { name: "Ricardo Emmanuel Mayorga Román", email: "Ricardo@example.com" },
+        { name: "Cesar Jared Carrillo Arreola ", email: "Cesar@example.com" }
       ];
 
       // Mostrar usuarios y productos
