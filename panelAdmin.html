@@ -122,6 +122,17 @@
           const deleteButton = document.createElement("button");
           deleteButton.classList.add("btn", "btn-danger", "btn-delete");
           deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Eliminar';
+          deleteButton.addEventListener("click", function () {
+            // Eliminar el producto del DOM
+            card.remove();
+            // Opcional: Realizar una solicitud HTTP para eliminar el producto del servidor
+            // fetch(`/api/deleteProduct/${product.id}`, { method: 'DELETE' })
+            //   .then(response => response.json())
+            //   .then(data => {
+            //     console.log('Producto eliminado:', data);
+            //   })
+            //   .catch(error => console.error('Error al eliminar el producto:', error));
+          });
           cardFooter.appendChild(deleteButton);
 
           productCard.appendChild(cardFooter);
