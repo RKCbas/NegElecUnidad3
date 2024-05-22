@@ -134,11 +134,32 @@
         function showOrders(orders) {
           let tbody = "";
           orders.forEach((order) => {
-            tbody += `<tr>
-                              <td>#${order.numero_de_orden}</td>
-                              <td>${order.fecha}</td>
-                              <td>${order.estado}</td>
-                            </tr>`;
+            if (order.estado === "completado") {
+              tbody += `<tr>
+                          <td>#${order.numero_de_orden}</td>
+                          <td>${order.fecha}</td>
+                          <td><span class="badge badge-success">${order.estado}</span></td>
+                        </tr>`;
+            }else if (order.estado === "pendiente") {
+              tbody += `<tr>
+                          <td>#${order.numero_de_orden}</td>
+                          <td>${order.fecha}</td>
+                          <td><span class="badge badge-warning">${order.estado}</span></td>
+                        </tr>`;
+            }else if (order.estado === "cancelado") {
+              tbody += `<tr>
+                          <td>#${order.numero_de_orden}</td>
+                          <td>${order.fecha}</td>
+                          <td><span class="badge badge-danger">${order.estado}</span></td>
+                        </tr>`;
+            }else{
+              tbody += `<tr>
+                          <td>#${order.numero_de_orden}</td>
+                          <td>${order.fecha}</td>
+                          <td><span class="badge badge-info">${order.estado}</span></td>
+                        </tr>`;
+            }
+
           });
           $("#pedidos-tbody").html(tbody);
         }
