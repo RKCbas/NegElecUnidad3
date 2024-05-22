@@ -17,8 +17,7 @@
     {
       "id": 2,
       "title": "Tokyo Ghoul",
-      "description": "Los habitantes de Tokio viven aterrados: en las sombras de la metrópolis se ocultan horribles monstruos que se camuflan entre la multitud, cazando y devorando seres humanos.",
-      "price": 180,
+      "description": "Los habitantes de Tokio viven aterrados: en las sombras de la metrópolis se ocultan horribles monstruos que se camuflan entre la multitu",       "price": 180,
       "stock": 90,
       "category": "Gore",
       "link": "Productos/Producto2.html",
@@ -31,7 +30,7 @@
     {
       "id": 3,
       "title": "Jujutsu Kaisen",
-      "description": "Yuuji Itadori, un estudiante de secundaria, que posee una rara habilidad física, pasa sus días visitando a su abuelo que se encontra hospitalizado. Pero un día, espíritus malditos que duermen en su escuela, se liberan y aparecen criaturas fantasmas.",
+      "description": "uuji Itadori, un estudiante de secundaria, que posee una rara habilidad física, pasa sus días visitando a su abuelo que se encontra hospitalizado cuando...",
       "price": 110,
       "stock": 36,
       "category": "Shonen",
@@ -45,7 +44,7 @@
     {
       "id": 4,
       "title": "Boruto - Blue Vortex",
-      "description": "La memoria colectiva de la gente ha cambiado, y ahora la Villa de la Hoja va detrás de la vida de Boruto. Pese a las adversidades, alguien ha estado esperando junto a Sasuke después de abandonar la Villa.",
+      "description": "La memoria colectiva de la gente ha cambiado, y ahora la Villa de la Hoja va detrás de la vida de Boruto.",
       "price": 159,
       "stock": 123,
       "category": "Shonen",
