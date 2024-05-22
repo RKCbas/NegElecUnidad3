@@ -46,6 +46,35 @@
     }
   </style>
 </head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <!-- Logotipo -->
+    <a class="navbar-brand" href="index.html">
+      <img src="logo.png" alt="Logo" width="50" height="50" class="d-inline-block align-top">
+      MANGACKEET_ADMIN
+    </a>
+    <!-- Botón para dispositivos móviles -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Enlaces de navegación -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="panelAdmin.html">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="panelAdminU.html">Usuarios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="panelAdminP.html">Pedidos</a>
+        </li>
+  
+  
+     
+    </div>
+  </div>
+</nav>
 <body>
   <div class="container mt-5">
     <div class="header">
@@ -64,6 +93,7 @@
       <!-- Columna de productos -->
       <div class="col-md-8 product-column" id="product-container">
         <h3>Productos</h3>
+        <button id="addProductBtn" class="btn btn-success mb-4">Añadir Producto</button>
         <div class="row" id="product-list">
           <!-- Los productos se cargarán aquí -->
         </div>
@@ -71,14 +101,13 @@
     </div>
   </div>
 
-  <!-- Modal de edición -->
-  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+   <!-- Modal de edición -->
+   <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="editModalLabel">Editar Producto</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-           
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -98,6 +127,37 @@
             </div>
             <input type="hidden" id="editProductId">
             <button type="submit" class="btn btn-primary">Guardar cambios</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de añadir -->
+  <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addModalLabel">Añadir Producto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="addForm">
+            <div class="form-group">
+              <label for="addTitle">Título</label>
+              <input type="text" class="form-control" id="addTitle" required>
+            </div>
+            <div class="form-group">
+              <label for="addDescription">Descripción</label>
+              <textarea class="form-control" id="addDescription" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="addThumbnail">URL de la Imagen</label>
+              <input type="url" class="form-control" id="addThumbnail" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Añadir Producto</button>
           </form>
         </div>
       </div>
@@ -127,63 +187,68 @@
       // Función para mostrar los productos
       function showProducts(products) {
         products.forEach((product, index) => {
-          const card = document.createElement("div");
-          card.classList.add("col-md-4");
-
-          const productCard = document.createElement("div");
-          productCard.classList.add("card");
-          productCard.dataset.productId = index;
-
-          const thumbnail = document.createElement("img");
-          thumbnail.classList.add("card-img-top", "thumbnail");
-          thumbnail.src = product.thumbnail;
-          thumbnail.alt = product.title;
-          productCard.appendChild(thumbnail);
-
-          const cardBody = document.createElement("div");
-          cardBody.classList.add("card-body");
-
-          const cardTitle = document.createElement("h5");
-          cardTitle.classList.add("card-title");
-          cardTitle.textContent = product.title;
-          cardBody.appendChild(cardTitle);
-
-          const cardText = document.createElement("p");
-          cardText.classList.add("card-text");
-          cardText.textContent = product.description;
-          cardBody.appendChild(cardText);
-
-          productCard.appendChild(cardBody);
-
-          const cardFooter = document.createElement("div");
-          cardFooter.classList.add("card-footer");
-
-          const editButton = document.createElement("button");
-          editButton.classList.add("btn", "btn-primary", "btn-edit");
-          editButton.innerHTML = '<i class="fas fa-edit"></i> Editar';
-          editButton.addEventListener("click", function () {
-            currentEditCard = productCard;
-            document.getElementById("editTitle").value = product.title;
-            document.getElementById("editDescription").value = product.description;
-            document.getElementById("editThumbnail").value = product.thumbnail;
-            document.getElementById("editProductId").value = index;
-            $('#editModal').modal('show');
-          });
-          cardFooter.appendChild(editButton);
-
-          const deleteButton = document.createElement("button");
-          deleteButton.classList.add("btn", "btn-danger", "btn-delete");
-          deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Eliminar';
-          deleteButton.addEventListener("click", function () {
-            card.remove();
-          });
-          cardFooter.appendChild(deleteButton);
-
-          productCard.appendChild(cardFooter);
-
-          card.appendChild(productCard);
-          productContainer.appendChild(card);
+          createProductCard(product, index);
         });
+      }
+
+      // Función para crear una tarjeta de producto
+      function createProductCard(product, index) {
+        const card = document.createElement("div");
+        card.classList.add("col-md-4");
+
+        const productCard = document.createElement("div");
+        productCard.classList.add("card");
+        productCard.dataset.productId = index;
+
+        const thumbnail = document.createElement("img");
+        thumbnail.classList.add("card-img-top", "thumbnail");
+        thumbnail.src = product.thumbnail;
+        thumbnail.alt = product.title;
+        productCard.appendChild(thumbnail);
+
+        const cardBody = document.createElement("div");
+        cardBody.classList.add("card-body");
+
+        const cardTitle = document.createElement("h5");
+        cardTitle.classList.add("card-title");
+        cardTitle.textContent = product.title;
+        cardBody.appendChild(cardTitle);
+
+        const cardText = document.createElement("p");
+        cardText.classList.add("card-text");
+        cardText.textContent = product.description;
+        cardBody.appendChild(cardText);
+
+        productCard.appendChild(cardBody);
+
+        const cardFooter = document.createElement("div");
+        cardFooter.classList.add("card-footer");
+
+        const editButton = document.createElement("button");
+        editButton.classList.add("btn", "btn-primary", "btn-edit");
+        editButton.innerHTML = '<i class="fas fa-edit"></i> Editar';
+        editButton.addEventListener("click", function () {
+          currentEditCard = productCard;
+          document.getElementById("editTitle").value = product.title;
+          document.getElementById("editDescription").value = product.description;
+          document.getElementById("editThumbnail").value = product.thumbnail;
+          document.getElementById("editProductId").value = index;
+          $('#editModal').modal('show');
+        });
+        cardFooter.appendChild(editButton);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.classList.add("btn", "btn-danger", "btn-delete");
+        deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Eliminar';
+        deleteButton.addEventListener("click", function () {
+          card.remove();
+        });
+        cardFooter.appendChild(deleteButton);
+
+        productCard.appendChild(cardFooter);
+
+        card.appendChild(productCard);
+        productContainer.appendChild(card);
       }
 
       // Simulación de datos de usuarios
@@ -205,6 +270,24 @@
           showProducts(data.products);
         })
         .catch(error => console.error('Error al obtener los productos:', error));
+
+      // Event listener para mostrar el modal de añadir producto
+      document.getElementById("addProductBtn").addEventListener("click", function () {
+        $('#addModal').modal('show');
+      });
+
+      // Event listener para añadir el producto desde el formulario
+      document.getElementById("addForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const newProduct = {
+          title: document.getElementById("addTitle").value,
+          description: document.getElementById("addDescription").value,
+          thumbnail: document.getElementById("addThumbnail").value
+        };
+        const newProductIndex = document.querySelectorAll('.product-column .card').length;
+        createProductCard(newProduct, newProductIndex);
+        $('#addModal').modal('hide');
+      });
 
       document.getElementById("editForm").addEventListener("submit", function (event) {
         event.preventDefault();
